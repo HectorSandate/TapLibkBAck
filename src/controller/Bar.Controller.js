@@ -36,3 +36,45 @@ export const registerBar = async (req, res) => {
   
   }
   
+  // Baja lógica de un bar
+export const deactivateBar = async (req, res) => {
+  try {
+    const barId = req.params.barId; // Obtener el ID del bar de los parámetros de la ruta
+
+    // Actualizar el campo isActive a false
+    const updatedBar = await Bar.findByIdAndUpdate(barId, { isActive: false }, { new: true });
+
+    res.status(200).json({ message: 'Bar desactivado exitosamente', bar: updatedBar });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+};
+
+// Obtener bares activos
+export const getActiveBars = async (req, res) => {
+  try {
+    // Obtener bares activos (donde isActive es true)
+    const activeBars = await Bar.find({ isActive: true });
+
+    res.status(200).json({ bars: activeBars });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+};
+
+// Eliminar permanentemente un bar
+export const deleteBar = async (req, res) => {
+  try {
+    const barId = req.params.barId; // Obtener el ID del bar de los parámetros de la ruta
+
+    // Eliminar el bar de la base de datos
+    await Bar.findByIdAndDelete(barId);
+
+    res.status(200).json({ message: 'Bar eliminado exitosamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+};

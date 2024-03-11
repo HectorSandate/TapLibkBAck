@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { createDateMiddleware, deactivateDateMiddleware } from '../middleware/createDateMiddleware.js'
 
 const recetaSchema = new mongoose.Schema({
   nombre: {
@@ -23,11 +24,15 @@ const recetaSchema = new mongoose.Schema({
     required: true,
   },
 
-
-  isActive: { 
+  isActive: {
     type: Boolean,
-     default: true },
-});
+    default: true,
+  },
+  createdAt: { type: Date },
 
+  deactivatedAt: { type: Date },
+});
+createDateMiddleware(recetaSchema);
+deactivateDateMiddleware(recetaSchema);
 //Es para especificarle a mongoose cual es nuestro modelo
 export default mongoose.model("Receta", recetaSchema);
