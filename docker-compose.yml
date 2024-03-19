@@ -1,0 +1,75 @@
+# version: '3.1'
+
+# services:
+#   mongo:
+#     image: mongo
+#     container_name: mongo
+#     restart: always
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - ./data:/data/db
+#       - ./data/log:/var/log/mongodb  # Corrección en la definición del segundo volumen
+#     networks:
+#       - mongo-network
+
+#   mongo-express:
+#     image: mongo-express:0.54
+#     container_name: mongo-express
+#     ports:
+#       - "8081:8081"
+#     depends_on:  # Correct the typo from "depens_on" to "depends_on"
+#       - mongo
+#     environment:  # Fix the typo in "environment" from "enviroment"
+#       ME_CONFIG_BASICAUTH_USERNAME: root
+#       ME_CONFIG_BASICAUTH_PASSWORD: root  # Correct the typo in "PASSWWORD" to "PASSWORD"
+#       ME_CONFIG_MONGODB_SERVER: mongo  # Update to specify the server name
+#       ME_CONFIG_MONGODB_PORT: 27017
+#       ME_CONFIG_BASICAUTH_ADMINUSERNAME: root1
+#       ME_CONFIG_BASICAUTH_ADMINPASSWORD: root  # Correct the typo in "ME_CONFIG_BASICAUTH_ADMINPASSWWORD" to "ME_CONFIG_BASICAUTH_ADMINPASSWORD"
+#     networks:
+#       - mongo-network
+
+# networks:
+#   mongo-network:
+#     driver: bridge
+
+
+# version: '3.1'
+
+# services:
+#   mongo:
+#     image: mongo:latest
+#     restart: always
+#     container_name: prueba
+#     hostname: host-mongo
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: secret
+#     volumes:
+#       - ./data:/data/db
+#       - ./data/log:/var/log/mongodb  # Corrección en la definición del segundo volumen
+#     ports:
+#       - "27017:27017"
+
+version: '3.1'
+
+services:
+  webnode:
+    container_name: basedatos
+    restart: always
+    build: .
+    ports:
+      - "5000:3000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/inte
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27020:27017"
+
+    
+      

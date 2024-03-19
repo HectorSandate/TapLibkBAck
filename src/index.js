@@ -3,5 +3,5 @@ import { connectDB } from "./config/db.js";
 
 connectDB();
 app.listen(3000, () => {
-  console.log("Up");
+  console.log("Servidor Activo");
 });
