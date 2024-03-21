@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const MONGO_URL = "mongodb://mongo:27017/inte";
+const MONGO_URL = "mongodb+srv://hectorjosediazsandate:hector0303@cluster0.e2xbkxs.mongodb.net/?retryWrites=true&w=majority";
 
 export const connectDB = async () => {
   try {
